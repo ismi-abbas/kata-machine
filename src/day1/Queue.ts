@@ -17,8 +17,9 @@ export default class Queue<T> {
   enqueue(item: T): void {
     const node = { value: item } as Node<T>
     this.length++
+    // can do with the this.length === 0 in javascript
     if (!this.tail) {
-      this.tail = this.head = { value: item } as Node<T>
+      this.tail = this.head = node
       return
     }
 
@@ -28,20 +29,36 @@ export default class Queue<T> {
 
   // remove from the queue
   deque(): T | undefined {
+    // if we have no head we cannot dequeue
     if (!this.head) {
       return undefined
     }
-    this.length--
 
+    this.length--
+    // update head to next node and return value of head
     const head = this.head
     this.head = this.head.next
-    // free
+    // free - just cleaning up the memory
     head.next = undefined
+
+    if (this.length === 0) {
+      this.tail = undefined
+    }
+
     return head.value
   }
 
   peek(): T | undefined {
+    // if head is undefined, return undefined, if not return head.value (which is T)
     return this.head?.value
   }
 }
+
+const queue = new Queue<string>()
+console.log(queue)
+queue.enqueue('Abbas')
+queue.enqueue('Ali')
+queue.deque()
+console.log(queue)
+console.log(queue.peek())
 

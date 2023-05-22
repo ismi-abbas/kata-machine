@@ -1,27 +1,51 @@
+type Node<T> = {
+  value: T
+  next?: Node<T>
+  prev?: Node<T>
+}
+
 export default class DoublyLinkedList<T> {
-    public length: number;
+  public length: number
+  private head?: Node<T>
 
-    
+  constructor() {
+    this.length = 0
+  }
 
-    constructor() {
+  prepend(item: T): void {}
+  insertAt(item: T, idx: number): void {}
+  append(item: T): void {}
+  remove(item: T): T | undefined {
+    let current = this.head
+    while (current) {
+        if (current.value === item) {
+            // remove the item
+            // return the item
+        }
+        current = current.next
     }
 
-    prepend(item: T): void {
+    return undefined
+  }
+  get(idx: number): T | undefined {
+    let current = this.head
+    for (let i = 0; i < idx && current; i++) {
+        current = current.next
+    }
 
-}
-    insertAt(item: T, idx: number): void {
+    return current?.value
+  }
+  removeAt(idx: number): T | undefined {
+    let current = this.head
+    for (let i = 0; i < idx && current; i++) {
+        current = current.next
+    }
 
-}
-    append(item: T): void {
+    if (!current) {
+        return undefined
+    }
 
-}
-    remove(item: T): T | undefined {
-
-}
-    get(idx: number): T | undefined {
-
-}
-    removeAt(idx: number): T | undefined {
-
-}
+    // remove the item
+    // return the item
+  }
 }
